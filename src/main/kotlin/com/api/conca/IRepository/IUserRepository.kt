@@ -1,4 +1,4 @@
-package com.api.conca.Repository
+package com.api.conca.IRepository
 
 import com.api.conca.Entity.User
 import org.springframework.data.jpa.repository.JpaRepository

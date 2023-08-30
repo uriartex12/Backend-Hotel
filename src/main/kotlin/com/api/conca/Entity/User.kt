@@ -6,15 +6,17 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users", schema = "public")
-@Getter
-@Setter
-class User {
+@Getter @Setter
+class User (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
-    val name: String? = null
-    val lastname: String? = null
-    val identitynumber: String? = null
-    val username: String? = null
-    val password: String? = null
-}
+    val id: Long,
+    val username: String,
+    val password: String,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stateid", referencedColumnName = "id")
+    val state:State,
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "businesssubjectid", referencedColumnName = "id")
+    val businesssubject:Businesssubject
+)

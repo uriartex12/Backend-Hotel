@@ -12,7 +12,7 @@ import java.util.*
 class TokenUtils {
     companion object{
         private val ACCESS_TOKEN_SECRET = "4qhq8LrBfycaRHXhd4sjkfsjdkko77890sd9s9s9sdnsj92237kitreuiotrewk4qhq8LrBfycaRHXhd4sjkfsjdkko77890sd9s9s9sdnsj92237kitreuiotrewk"
-        private val ACCESS_TOKEN_VALIDITY_SECONDS = 2592000L
+        private val ACCESS_TOKEN_VALIDITY_SECONDS = 3600L
         val JWT_TOKEN_VALIDITY = (5 * 60 * 60).toLong()
 
 
@@ -32,14 +32,11 @@ class TokenUtils {
     }
 
 
-    fun createToken(name: String?, username: String?): String {
-
-        println("username $username - $name")
-
+    fun createToken(businessname: String, username: String?): String {
         val expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1000
         val expirationDate = Date(System.currentTimeMillis() + expirationTime)
         return Jwts.builder()
-                .claim("name",name)
+                .claim("businessname",businessname)
                 .setSubject(username)
                 .setExpiration(expirationDate)
                 .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.toByteArray()))

@@ -1,14 +1,23 @@
 package com.api.conca.Service
 
-import com.api.conca.Entity.Habitation
+import com.api.conca.Controller.HabitationRequest
+import com.api.conca.Controller.HabitationResponse
+import com.api.conca.Controller.RegisterHabitationResquest
 import com.api.conca.Repository.HabitationRepository
-import com.api.conca.Repository.IHabitationRepository
 import org.springframework.stereotype.Service
+import kotlin.jvm.Throws
 
 @Service
-class HabitationService(val iHabitationRepository: IHabitationRepository,val habitationRepository: HabitationRepository):IHabitationService {
+class HabitationService(val habitationRepository: HabitationRepository){
 
-    override fun list(): List<Habitation> {
-       return habitationRepository.list()
+    @Throws(Exception::class)
+    fun list(params: HabitationRequest): HabitationResponse {
+      with(params){
+          val habitations=habitationRepository.list(params)
+          return HabitationResponse(page!!,xpage!!,habitations.second,habitations.first)
+      }
+    }
+    fun save(habitationResquest: RegisterHabitationResquest) {
+        TODO("Not yet implemented")
     }
 }

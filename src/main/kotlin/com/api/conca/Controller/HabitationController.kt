@@ -1,19 +1,25 @@
 package com.api.conca.Controller
 
 import com.api.conca.Entity.Habitation
-import com.api.conca.Service.IHabitationService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import com.api.conca.Service.HabitationService
+import org.springframework.web.bind.annotation.*
 
+
+data class HabitationResponse(val page: Int?, val xpage:Int, val total: Int, val list: List<Habitation>)
+data class HabitationRequest(val page: Int?=1, val xpage: Int?=10, val name: String?="", val categoryId: Int?=0,var limit:Int?=0,var count:Boolean?=false)
+
+data class RegisterHabitationResquest(val name:String)
 
 @RestController
-@RequestMapping("/api")
-internal class HabitationController(val habitationService: IHabitationService) {
+@RequestMapping("/api/habitation")
+internal class HabitationController(val habitationService: HabitationService) {
 
-    @GetMapping("/habitation")
-    fun listHabitation(): List<Habitation> {
-        return habitationService.list()
+    @GetMapping
+    fun listHabitation(@ModelAttribute params:HabitationRequest): HabitationResponse {
+        return habitationService.list(params)
+    }
+    @PostMapping
+    fun save(@RequestBody habitationResquest:RegisterHabitationResquest){
+        habitationService.save(habitationResquest)
     }
 }

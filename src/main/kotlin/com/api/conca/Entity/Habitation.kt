@@ -10,10 +10,10 @@ import javax.persistence.*
 class Habitation (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Int,
     val name:String,
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoryid")
+    @JoinColumn(name = "categoryid", referencedColumnName = "id")
     val category:Category,
     val description:String? = "",
     val status:Int?=0

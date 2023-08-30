@@ -8,8 +8,9 @@ create table IF NOT EXISTS category(
 create table IF NOT EXISTS habitation(
  	id serial primary key,
   	name varchar(250),
-  	categoryId int4 NOT NULL,
+  	categoryid int4 NOT NULL,
   	description varchar(250),
-  	status int4,
-  	constraint category_id_fk foreign key (categoryId) references category(id)
+  	stateid int4,
+  	constraint category_id_fk foreign key (categoryid) references category(id),
+  	constraint state_id_fk foreign key (stateid) references state(id)
 );

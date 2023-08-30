@@ -5,12 +5,12 @@ import lombok.Setter
 import javax.persistence.*
 
 @Entity
-@Table(name = "category", schema = "public")
+@Table(name="subjectrolcategory", schema = "public")
 @Getter @Setter
-class Category (
+class Subjectrolcategory (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
-    val name: String,
-    val description: String
+    val id: Long,
+    val name:String,
+    val description:String
 )

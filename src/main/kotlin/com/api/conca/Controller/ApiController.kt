@@ -2,6 +2,7 @@ package com.api.conca.Controller
 
 import com.api.conca.Configuration.TokenUtils
 import com.api.conca.Service.UserService
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
@@ -16,7 +17,9 @@ class ApiController(val userService: UserService,val bcryptEncoder: PasswordEnco
 
     @Autowired
     private lateinit var jwtTokenUtil: TokenUtils
-
+    companion object{
+        private val logger = LoggerFactory.getLogger(ApiController::class.java)
+    }
 
    @GetMapping
    fun modalAndWiew(): Any {
@@ -29,12 +32,14 @@ class ApiController(val userService: UserService,val bcryptEncoder: PasswordEnco
    fun authentication(@RequestBody  authentication:JWTRequest):JWTResponse{
     try {
         userService.loadUserByUsernameAndPassword(authentication.username,authentication.password).let { user->
-            val token=jwtTokenUtil.createToken(user.name, user.username)
+            val token=jwtTokenUtil.createToken(user.businesssubject.businessname, user.username)
+            logger.info("Authentication : $token")
             return JWTResponse(token,
                     user.id,
                     user.username)
         }
     }catch (e:Exception){
+        logger.error("ERROR: ${e.message}")
         throw Exception(e.message)
     }
    }
