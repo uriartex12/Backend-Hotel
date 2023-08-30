@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS businesssubject(
 
 
 INSERT INTO businesssubject(id,subjectid,identitydocumentid,identityNumber,businessname,subjectrolcategoryid,
-                    startdate,phones,address,districtid,email,code,provinceid,city,companyid,state,otherreferences,parentid,
+                    startdate,phone,address,districtid,email,code,provinceid,city,companyid,state,otherreferences,parentid,
                     paymodeid,payrollentrydate,salary,browser_agent,creditcard)
              VALUES(1,1,1,'73170086','anonimos',1,'12-02-2023','945889652','Jr. Grau 578',
              null,'anony@gmail.com','0578',null,'Lima',
