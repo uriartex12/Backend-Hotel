@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 class PanelactionController(val panelactionService: PanelactionService) {
 
     @GetMapping("/panelaction")
-    fun getPanelaction(): List<Panelaction>{
+    fun getPanelaction():  Map<String, List<Panelaction>>{
         return panelactionService.panelaction()
     }
 }

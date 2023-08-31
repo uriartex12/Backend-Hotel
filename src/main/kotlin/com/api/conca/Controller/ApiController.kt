@@ -31,9 +31,9 @@ class ApiController(val userService: UserService,val bcryptEncoder: PasswordEnco
    @PostMapping("/authentication")
    fun authentication(@RequestBody  authentication:JWTRequest):JWTResponse{
     try {
+        logger.info("Authentication : $authentication")
         userService.loadUserByUsernameAndPassword(authentication.username,authentication.password).let { user->
             val token=jwtTokenUtil.createToken(user.businesssubject.businessname, user.username)
-            logger.info("Authentication : $token")
             return JWTResponse(token,
                     user.id,
                     user.username)

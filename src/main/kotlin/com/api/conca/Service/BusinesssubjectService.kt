@@ -14,14 +14,13 @@ class BusinesssubjectService {
     fun saveBusinesssubject(subject:BusinesssubjectDTO):String{
         with(subject){
 
-            //val identitydocument= Identitydocument("name");
-
-
+            //val identitydocument= Identitydocument("","","","".)
 
         }
 
         return ""
     }
+
 
 
 }
