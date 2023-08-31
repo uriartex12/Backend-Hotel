@@ -11,6 +11,7 @@ data class BusinesssubjectDTO (
     val subjectrolcategoryid: Int?=null,
     val phone:String?="",
     val address:String?="",
+    val startdate: String,
     val districtid:Int?=null,
     val email:String?="",
     val code:String?="",
@@ -25,7 +26,7 @@ data class BusinesssubjectDTO (
     val creditcard:String?="",
     val firstname:String,
     val secondname:String,
-    val birthday:Date?=null,
+    val birthday:String?="",
     val subjecttypeid: Int,
     val maritalstatus:String?=""
 )

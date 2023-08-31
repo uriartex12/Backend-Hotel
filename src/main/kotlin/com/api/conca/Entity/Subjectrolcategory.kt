@@ -7,10 +7,12 @@ import javax.persistence.*
 @Entity
 @Table(name="subjectrolcategory", schema = "public")
 @Getter @Setter
-class Subjectrolcategory (
+class Subjectrolcategory(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Int?,
     val name:String,
     val description:String
-)
+){
+    constructor(id: Int?) : this(id = id, name = "", description = "")
+}

@@ -16,5 +16,7 @@ class Habitation (
     @JoinColumn(name = "categoryid", referencedColumnName = "id")
     val category:Category,
     val description:String? = "",
-    val status:Int?=0
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stateid", referencedColumnName = "id")
+    val state:State
 )

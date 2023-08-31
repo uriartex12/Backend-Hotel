@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController
 class SubjectController(val businesssubjectService: BusinesssubjectService){
 
     @PostMapping("/saveBusinesssubject")
-    fun saveBusinesssubject(@RequestBody subject: BusinesssubjectDTO){
-        businesssubjectService.saveBusinesssubject(subject)
+    fun saveBusinesssubject(@RequestBody subject: BusinesssubjectDTO):Int{
+        return businesssubjectService.saveBusinesssubject(subject)
     }
 
 }

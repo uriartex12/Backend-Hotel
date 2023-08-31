@@ -1,26 +1,22 @@
 package com.api.conca.Service
 
 import com.api.conca.Dto.BusinesssubjectDTO
-import com.api.conca.Entity.Identitydocument
+import com.api.conca.Entity.*
+import com.api.conca.IRepository.IBusinesssubjectRepository
+import com.api.conca.IRepository.ISubjectRepository
+import com.api.conca.Repository.BusinesssubjectRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import kotlin.jvm.Throws
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 @Service
-class BusinesssubjectService {
+class BusinesssubjectService(val businesssubjectRepository: BusinesssubjectRepository) {
 
     @Throws(Exception::class)
     @Transactional
-    fun saveBusinesssubject(subject:BusinesssubjectDTO):String{
-        with(subject){
-
-            //val identitydocument= Identitydocument("","","","".)
-
-        }
-
-        return ""
+    fun saveBusinesssubject(subject:BusinesssubjectDTO):Int{
+        return businesssubjectRepository.saveBusinesssubject(subject)
     }
-
-
-
 }

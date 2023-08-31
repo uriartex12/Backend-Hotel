@@ -13,9 +13,11 @@ class Identitydocument @JvmOverloads constructor (
     val id: Int,
     val shortname:String,
     val fullname:String,
-    val length:Int,
+    val length: Int?,
     val mask:String,
     val legacydetail:String,
-    val isprimary:Int,
-    val isforbusiness:Int
-)
+    val isprimary:Int?,
+    val isforbusiness:Int?
+){
+    constructor(id:Int) : this(id = id, shortname = "", fullname = "", length = null, mask = "", legacydetail = "", isprimary = null, isforbusiness = null)
+}
