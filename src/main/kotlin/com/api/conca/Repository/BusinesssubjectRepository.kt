@@ -1,9 +1,11 @@
 package com.api.conca.Repository
 
+import com.api.conca.Controller.BusinesssubjectSaveResponse
 import com.api.conca.Dto.BusinesssubjectDTO
 import com.api.conca.Entity.*
 import com.api.conca.IRepository.IBusinesssubjectRepository
 import com.api.conca.IRepository.ISubjectRepository
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 import java.text.SimpleDateFormat
@@ -14,19 +16,18 @@ class BusinesssubjectRepository(val subjectRepository: ISubjectRepository, val b
 
     @Throws(Exception::class)
     @Transactional
-    fun saveBusinesssubject(subject: BusinesssubjectDTO):Int{
+    fun saveBusinesssubject(subject: BusinesssubjectDTO): BusinesssubjectSaveResponse {
         with(subject){
             val identitydocument= Identitydocument(identitydocumentid)
             val subjecttype= Subjecttype(subjecttypeid)
             val subjectrolcategory= Subjectrolcategory(subjectrolcategoryid)
             val subject=subjectRepository.save(
-                Subject(identitydocument,identitynumber,firstname,secondname,
-                    SimpleDateFormat("dd/MM/yyyy").parse(birthday),address,phone,subjecttype,districtid,maritalstatus)
+                        Subject(identitydocument,identitynumber,firstname,secondname,SimpleDateFormat("dd/MM/yyyy").parse(birthday),address,phone,subjecttype,districtid,maritalstatus)
             )
             val startdate: Date = SimpleDateFormat("dd/MM/yyyy").parse(startdate)
             val  currentBusinesssubject= Businesssubject(subject,identitydocument,identitynumber,businessname,subjectrolcategory,startdate,phone,address,districtid,email,city)
             val currentBusinesssubjectId =businesssubjectRepository.save(currentBusinesssubject).id
-            return currentBusinesssubjectId!!
+            return BusinesssubjectSaveResponse(HttpStatus.OK.value(),"OK.OO",currentBusinesssubjectId!!)
         }
     }
 }
