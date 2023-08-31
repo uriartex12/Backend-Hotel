@@ -15,8 +15,7 @@ import java.util.*
 class BusinesssubjectService(val businesssubjectRepository: BusinesssubjectRepository) {
 
     @Throws(Exception::class)
-    @Transactional
-    fun saveBusinesssubject(subject:BusinesssubjectDTO):Int{
+    fun saveBusinesssubject(subject:BusinesssubjectDTO):Int {
         return businesssubjectRepository.saveBusinesssubject(subject)
     }
 }
