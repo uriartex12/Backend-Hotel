@@ -13,12 +13,18 @@ class BusinesssubjectService {
     @Transactional
     fun saveBusinesssubject(subject:BusinesssubjectDTO):String{
         with(subject){
+
                // Identitydocument()
+
+
+            //val identitydocument= Identitydocument("","","","".)
+
 
         }
 
         return ""
     }
+
 
 
 }

@@ -17,6 +17,8 @@ class WebSecurityConfig(private val jwtAuthorizationFilter: JWTAuthorizationFilt
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http
+                .cors()
+                .and()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()

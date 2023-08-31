@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 @Service
 class PanelactionService (val panelactionRepositoryI: IPanelactionRepository) {
 
-    fun panelaction(): List<Panelaction> {
-        return panelactionRepositoryI.findAll()
+    fun panelaction(): Map<String, List<Panelaction>> {
+         return panelactionRepositoryI.findAll().groupBy { it.menu }
     }
 }

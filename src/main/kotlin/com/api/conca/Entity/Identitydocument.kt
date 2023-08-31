@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity
 @Table(name="identitydocument", schema = "public")
 @Getter @Setter
-class Identitydocument (
+class Identitydocument @JvmOverloads constructor (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
