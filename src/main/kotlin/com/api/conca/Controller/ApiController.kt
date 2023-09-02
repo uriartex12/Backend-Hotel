@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.ModelAndView
 
 data class JWTRequest(val username:String,val password:String)
-data class JWTResponse(val token:String,val userId:Long?,val username:String?)
+data class JWTResponse( val token:String,val userId:Long?, val username:String?, val businesssubjectid: Int?, val identitynumber:String,)
 
 @RestController
 @RequestMapping
@@ -36,7 +36,9 @@ class ApiController(val userService: UserService,val bcryptEncoder: PasswordEnco
             val token=jwtTokenUtil.createToken(user.businesssubject.businessname, user.username)
             return JWTResponse(token,
                     user.id,
-                    user.username)
+                    user.username,
+                    user.businesssubject.id,
+                    user.businesssubject.identitynumber)
         }
     }catch (e:Exception){
         logger.error("ERROR: ${e.message}")

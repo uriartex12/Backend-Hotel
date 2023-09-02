@@ -21,10 +21,9 @@ class JWTAuthorizationFilter: OncePerRequestFilter() {
                 val token = bearerToken.replace("Bearer ", "")
                 val usernamePAT: UsernamePasswordAuthenticationToken = TokenUtils.getAuthentication(token)!!
                 SecurityContextHolder.getContext().authentication = usernamePAT
-                filterChain.doFilter(request, response)
-            } else {
-                sendErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Token not found")
             }
+            filterChain.doFilter(request, response)
+
         } catch (e: Exception) {
             sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, "Expired token")
         }

@@ -1,5 +1,6 @@
 package com.api.conca.Configuration
 
+import com.api.conca.Entity.Businesssubject
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
@@ -32,11 +33,11 @@ class TokenUtils {
     }
 
 
-    fun createToken(businessname: String, username: String?): String {
+    fun createToken(businesssubject: String, username: String?): String {
         val expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1000
         val expirationDate = Date(System.currentTimeMillis() + expirationTime)
         return Jwts.builder()
-                .claim("businessname",businessname)
+                .claim("Businesssubject",businesssubject)
                 .setSubject(username)
                 .setExpiration(expirationDate)
                 .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.toByteArray()))
