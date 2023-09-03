@@ -8,6 +8,7 @@ create table IF NOT EXISTS category(
 create table IF NOT EXISTS habitation(
  	id serial primary key,
   	name varchar(250),
+  	nbets int4 NOT NULL,
   	categoryid int4 NOT NULL,
   	description varchar(250),
   	stateid int4,

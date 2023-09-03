@@ -12,6 +12,7 @@ class Habitation (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
     val name:String,
+    val nbets:Int,
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryid", referencedColumnName = "id")
     val category:Category,
