@@ -1,11 +1,12 @@
 package com.api.conca.Controller
 
+import com.api.conca.Dto.HabitationDTO.ListAllHabitationDTO
 import com.api.conca.Entity.Habitation
 import com.api.conca.Service.HabitationService
 import org.springframework.web.bind.annotation.*
 
 
-data class HabitationResponse(val page: Int?, val xpage:Int, val total: Int, val list: List<Habitation>)
+data class HabitationResponse(val page: Int?, val xpage:Int, val total: Int, val list: List<ListAllHabitationDTO>)
 data class HabitationRequest(val page: Int?=1, val xpage: Int?=10, val name: String?="", val categoryId: Int?=0,var limit:Int?=0,var count:Boolean?=false)
 
 data class RegisterHabitationResquest(val name:String)
