@@ -1,10 +1,13 @@
 package com.api.conca.Repository
 
-import com.api.conca.Controller.BusinesssubjectSaveResponse
+import com.api.conca.Controller.EmployedResponse
+import com.api.conca.Controller.EmployedSaveResponse
 import com.api.conca.Controller.SubjectRequest
 import com.api.conca.Dto.BusinesssubjectDTO
 import com.api.conca.Entity.*
 import com.api.conca.IRepository.IBusinesssubjectRepository
+import com.api.conca.IRepository.IBusinesssubjectrolRepository
+import com.api.conca.IRepository.IEmployedRepository
 import com.api.conca.IRepository.ISubjectRepository
 import com.api.conca.Util.Util
 import org.springframework.http.HttpStatus
@@ -16,24 +19,34 @@ import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 
 @Repository
-class BusinesssubjectRepository(val subjectRepository: ISubjectRepository, val businesssubjectRepository: IBusinesssubjectRepository,val util: Util) {
+class BusinesssubjectRepository(val subjectRepository: ISubjectRepository, val businesssubjectRepository: IBusinesssubjectRepository,
+                                val util: Util,val employedRepository: IEmployedRepository,val businesssubjectrolRepository: IBusinesssubjectrolRepository
+) {
 
     @PersistenceContext
     private lateinit var entityManager: EntityManager
     @Throws(Exception::class)
     @Transactional
-    fun saveBusinesssubject(subject: BusinesssubjectDTO): BusinesssubjectSaveResponse {
+    fun saveBusinesssubject(subject: BusinesssubjectDTO): EmployedSaveResponse {
         with(subject){
             val identitydocument= Identitydocument(identitydocumentid)
             val subjecttype= Subjecttype(subjecttypeid)
             val subjectrolcategory= Subjectrolcategory(subjectrolcategoryid)
+            val subjectrol=Subjectrol(subjectrolid,subjectrolcategory.id)
+
             val subject=subjectRepository.save(
                         Subject(identitydocument,identitynumber,firstname,secondname,SimpleDateFormat("dd/MM/yyyy").parse(birthday),address,phone,subjecttype,districtid,maritalstatus)
             )
             val startdate: Date = SimpleDateFormat("dd/MM/yyyy").parse(startdate)
-            val  currentBusinesssubject= Businesssubject(subject,identitydocument,identitynumber,businessname,subjectrolcategory,startdate,phone,address,districtid,email,city)
-            val currentBusinesssubjectId =businesssubjectRepository.save(currentBusinesssubject).id
-            return BusinesssubjectSaveResponse(HttpStatus.OK.value(),"OK.OO",currentBusinesssubjectId!!)
+            val currentBusinesssubject= Businesssubject(subject,identitydocument,identitynumber,"$firstname  $secondname",subjectrolcategory,startdate,phone,address,districtid,email,city)
+            val businesssubject =businesssubjectRepository.save(currentBusinesssubject)
+            val businesssubjectrol=Businesssubjectrol(businesssubject.id,subjectrol.id,Date())
+            businesssubjectrolRepository.save(businesssubjectrol)
+            val employed=Employed(businesssubject,1,subjectrol)
+            val employedDb= employedRepository.save(employed)
+            return EmployedSaveResponse(HttpStatus.OK.value(),"OK.OO",
+                EmployedResponse(employedDb.id,businesssubject.id,subjectrol.id)
+            )
         }
     }
 

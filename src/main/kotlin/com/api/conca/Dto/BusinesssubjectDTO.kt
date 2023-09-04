@@ -7,6 +7,8 @@ data class BusinesssubjectDTO (
     val id:Long?=null,
     val identitydocumentid:Int,
     val identitynumber:String,
+    val businesssubjectid:Int?=null,
+    val employedid:Int?=null,
     val businessname:String?="",
     val subjectrolcategoryid: Int?=null,
     val phone:String?="",
@@ -19,6 +21,7 @@ data class BusinesssubjectDTO (
     val city:String?="",
     val companyid:Int?=null,
     val otherreferences:String?="",
+    val subjectrolid:Int,
     val parentid:Int?=null,
     val paymodeid:Int?=null,
     val salary: BigDecimal?=null,
@@ -26,7 +29,7 @@ data class BusinesssubjectDTO (
     val creditcard:String?="",
     val firstname:String,
     val secondname:String,
-    val birthday:String?="",
+    var birthday:String?="",
     val subjecttypeid: Int,
     val maritalstatus:String?=""
 )
