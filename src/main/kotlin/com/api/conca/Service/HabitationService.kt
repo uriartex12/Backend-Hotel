@@ -16,7 +16,7 @@ class HabitationService(val habitationRepository: HabitationRepository){
     fun list(params: HabitationRequest): HabitationResponse {
       with(params){
           val habitations=habitationRepository.list(params)
-          val listHabitationsDTO = MappingHabitationDTO(habitations.first)
+          val listHabitationsDTO = mappingHabitationDTO(habitations.first)
           return HabitationResponse(page!!,xpage!!,habitations.second,listHabitationsDTO)
       }
     }
@@ -24,9 +24,9 @@ class HabitationService(val habitationRepository: HabitationRepository){
         TODO("Not yet implemented")
     }
 
-    fun MappingHabitationDTO(habitations: List<Habitation>): List<ListAllHabitationDTO> {
+    fun mappingHabitationDTO(habitations: List<Habitation>): List<ListAllHabitationDTO> {
         return habitations.map { habitation ->
-            ListAllHabitationDTO(habitation.name, habitation.category.name,habitation.nbets,habitation.description,habitation.state.id)
+            ListAllHabitationDTO(habitation.name,habitation.category.name,habitation.nbets,habitation.description,habitation.state.id)
         }
     }
 }

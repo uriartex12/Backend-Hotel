@@ -9,11 +9,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import java.util.*
-import javax.persistence.FetchType
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
 
-data class BusinesssubjectSaveResponse(val code: Int, val message: String, val businesssubjectId:Int)
+
+data class EmployedResponse(val id: Int?, val businesssubjectId: Int?, val subjectrolid: Int?)
+data class EmployedSaveResponse(val code: Int, val message: String,val employed:EmployedResponse)
 data class SubjectRequest(val page: Int?=1, val xpage: Int?=10, val name: String?="", val categoryId: Int?=0,var limit:Int?=0,var count:Boolean?=false)
 data class SubjecResponse(val page: Int?, val xpage:Int, val total: Int, val list: List<Subject>)
 
@@ -37,9 +36,9 @@ class SubjectController(val businesssubjectService: BusinesssubjectService){
     companion object{
         private val logger = LoggerFactory.getLogger(SubjectController::class.java)
     }
-    @PostMapping("/saveBusinesssubject")
-    fun saveBusinesssubject(@Validated @RequestBody subject: BusinesssubjectDTO):BusinesssubjectSaveResponse{
-        logger.info("saveBusinesssubject $subject")
+    @PostMapping("/saveEmployed")
+    fun saveBusinesssubject(@Validated @RequestBody subject: BusinesssubjectDTO):EmployedSaveResponse{
+        logger.info("saveEmployed $subject")
         return businesssubjectService.saveBusinesssubject(subject)
     }
 
